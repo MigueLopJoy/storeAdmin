@@ -1,1 +1,5 @@
-<p>PRODUCTS WORKS</p>
+<div class="products-wrapper">
+    @for(product of products; track product.id) {
+        <app-product [product]="product"></app-product>
+    }
+</div>

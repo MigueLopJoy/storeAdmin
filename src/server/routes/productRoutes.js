@@ -4,8 +4,10 @@ const Product = require('../models/products');
 
 // GET all products
 router.get('/', async (req, res) => {
+    console.log("REQUEST RECEIVED")
     try {
         const products = await Product.find();
+        console.log(products)
         res.json(products);
     } catch (err) {
         res.status(500).json({ message: err.message });

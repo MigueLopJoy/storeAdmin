@@ -1,1 +1,17 @@
-<p>product works!</p>
+<div class="card d-flex flex-column gap-1">
+    <img mat-card-image src="{{product.image}}" alt="{{product.name}} image" class="img-fluid">
+
+    
+    <h3 class="title">{{product.name}}</h3>
+
+    <div class="price-wrapper">
+        <span>Price:</span>
+        <span>{{product.price}}</span>
+    </div>
+
+    <p-rating
+    [(ngModel)]="product.rating"
+    [readonly]="true"
+    iconCancelClass="hidden"
+    ></p-rating>
+</div>
