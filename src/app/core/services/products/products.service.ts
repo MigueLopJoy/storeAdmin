@@ -13,4 +13,8 @@ export class ProductsService {
   getProducts(url: string): Observable<Product[]> {
     return this.apiService.get(url);
   }
+
+  addProduct(url: string, body: Product) {
+    return this.apiService.post(url, body)
+  }
 }

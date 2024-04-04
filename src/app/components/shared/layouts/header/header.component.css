@@ -1,9 +1,16 @@
 .header-wrapper {
     max-width: 100%;
-    padding: 2rem;
-    background-color: #0986bb;
+    border-bottom: 1px solid #ddd;
 }
 
 .logo-wrapper {
     text-align: center;
+}
+
+.logo-wrapper img {
+    max-width: 15rem;
+}
+
+@media (min-width: 576px) {
+
 }

@@ -10,5 +10,15 @@
         </div>
 
         <p-rating [(ngModel)]="product.rating" [readonly]="true" iconCancelClass="hidden"></p-rating>
+
     </div>
+
+    <div class="action-btns-wrapper d-flex justify-end gap-05 p-1">
+        <p-button 
+            label="Edit" 
+            (click)="displayEditPopup()"></p-button>
+
+        <p-button label="Delete" severity="danger"></p-button>
+    </div>
+
 </div>
