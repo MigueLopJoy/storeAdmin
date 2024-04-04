@@ -1,5 +1,10 @@
-<div class="products-wrapper">
-    @for(product of products; track product.id) {
+<div class="products-wrapper p-1">
+    <div class="products-cards-wrapper d-flex flex-wrap justify-center">
+        @for(product of products; track product.id) {
         <app-product [product]="product"></app-product>
-    }
+        }
+    </div>
+    <div class="add-button-wrapper">
+        <p-button label="Create Product"></p-button>
+    </div>
 </div>

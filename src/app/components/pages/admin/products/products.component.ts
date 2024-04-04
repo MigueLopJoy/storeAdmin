@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { ProductsService } from '../../../../core/services/products/products.service';
 import { Product } from '../../../../core/models/product';
 import { ProductComponent } from './product/product.component';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductComponent],
+  imports: [ProductComponent, ButtonModule],
   templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+  styleUrl: './products.component.scss'
 })
 
 export class ProductsComponent {
