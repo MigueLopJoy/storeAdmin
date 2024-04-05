@@ -14,7 +14,12 @@ export class ProductsService {
     return this.apiService.get(url);
   }
 
-  addProduct(url: string, body: Product) {
-    return this.apiService.post(url, body)
+  addProduct(url: string, body: Product): Observable<Product> {
+    return this.apiService.post(url, body);
+  }
+
+  editProduct(url: string, body: Product): Observable<Product>  {
+    console.log("ESTAMOS")
+    return this.apiService.put(url, body);
   }
 }

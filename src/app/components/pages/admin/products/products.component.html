@@ -1,34 +1,20 @@
 <div class="products-wrapper p-1">
     <div class="products-cards-wrapper d-flex flex-wrap justify-center">
-        @for(product of products; track product.id) {
-            <app-product 
-                [product]="product" 
-                (displayEditDialogChange)="displayEditDialog($event)"
-            ></app-product>
+        @for(product of products; track product._id) {
+        <app-product [product]="product" (displayEditDialogChange)="displayEditDialog($event)"></app-product>
         }
     </div>
-    
+
     <div class="add-button-wrapper d-flex justify-end">
-        <p-button 
-            (click)="displayAddDialog()" 
-            icon="pi pi-plus"
-            label="Add Product"
-        ></p-button>
+        <p-button (click)="displayAddDialog()" icon="pi pi-plus" label="Add Product"></p-button>
     </div>
 
     <div class="dialogs-wrapper">
-        <app-product-popup 
-        header="Add Product" 
-        [(display)]="displayAddPopup"
-        (confirm)="onConfirmAdd($event)"
-    ></app-product-popup>
+        <app-product-popup header="Add Product" [(display)]="displayAddPopup"
+            (confirm)="onConfirmAdd($event)"></app-product-popup>
 
-    <app-product-popup 
-        header="Edit Product" 
-        [selectedProduct]="selectedProduct"
-        [(display)]="displayEditPopup"
-        (confirm)="onConfirmEdit($event)"
-    ></app-product-popup>
+        <app-product-popup header="Edit Product" [selectedProduct]="selectedProduct" [(display)]="displayEditPopup"
+            (confirm)="onConfirmEdit($event)"></app-product-popup>
     </div>
-    
+
 </div>

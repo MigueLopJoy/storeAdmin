@@ -14,7 +14,12 @@ export class ApiService {
     return this.httpClient.get<T>(url);
   }
 
-  post<T>(url: string, body: Product) {
+  post<T>(url: string, body: Product): Observable<T> {
     return this.httpClient.post<T>(url, body);
+  }
+
+  put<T>(url: string, body: Product): Observable<T> {
+    console.log("SEGUIMOS")
+    return this.httpClient.put<T>(url, body);
   }
 }

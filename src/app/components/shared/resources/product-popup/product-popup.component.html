@@ -1,13 +1,13 @@
 <p-dialog [header]="header" [(visible)]="display" (visibleChange)="onDisplayChange()">
-        
+
     <form [formGroup]="productForm">
-        
+
         <p-inputGroup class="mb-1">
             <input pInputText placeholder="Product Name" formControlName="name" />
         </p-inputGroup>
 
         <p-inputGroup class="mb-1">
-            <p-inputNumber pInputNumber placeholder="Price" formControlName="price"/>
+            <p-inputNumber pInputNumber placeholder="Price" formControlName="price" />
         </p-inputGroup>
 
         <p-inputGroup class="mb-1">
@@ -17,23 +17,14 @@
         <p-inputGroup class="mb-1">
             <p-rating iconCancelClass="hidden" formControlName="rating"></p-rating>
         </p-inputGroup>
-        
+
     </form>
 
     <p-footer>
         <div class="action-btns-wrapper d-flex justify-end gap-05">
-            <p-button 
-                (click)="onConfirm()" 
-                icon="pi pi-check"
-                label="Confirm"
-            ></p-button>
-            <p-button 
-                (click)="onCancel()" 
-                icon="pi pi-times"
-                label="Cancel"
-                severity="danger"
-            ></p-button>
+            <p-button (click)="onConfirm()" icon="pi pi-check" label="Confirm"></p-button>
+            <p-button (click)="onCancel()" icon="pi pi-times" label="Cancel" severity="danger"></p-button>
         </div>
     </p-footer>
-    
+
 </p-dialog>

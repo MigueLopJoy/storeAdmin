@@ -51,8 +51,6 @@ export class ProductPopupComponent {
       image: image || '',
       rating: rating || 0
     });
-
-    this.closeDialog()
   }
 
   onCancel() {

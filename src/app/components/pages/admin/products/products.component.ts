@@ -42,8 +42,24 @@ export class ProductsComponent {
       .addProduct('http://localhost:3000/products', product)
       .subscribe(
         {
-          next: (data) => {
-            this.fetchProducts();
+          next: (addedProduct: Product) => {
+            this.products.push(addedProduct)
+          },
+          error: (error: Error) => {
+            console.log(error);
+          },
+        }
+      )
+  }
+
+  editProduct(product: Product) {
+    console.log(this.selectedProduct._id)
+    this.productsService
+      .editProduct(`http://localhost:3000/products/${this.selectedProduct._id}`, product)
+      .subscribe(
+        {
+          next: (editedProduct: Product) => {
+            this.products[this.products.indexOf(product)] = editedProduct            
           },
           error: (error: Error) => {
             console.log(error);
@@ -68,9 +84,10 @@ export class ProductsComponent {
   }
 
   onConfirmAdd(product: Product) {
-    this.addProduct(product)
+    this.addProduct(product);
   }
 
   onConfirmEdit(product: Product) {
+    this.editProduct(product);
   }
 }

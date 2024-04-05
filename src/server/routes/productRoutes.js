@@ -4,10 +4,8 @@ const Product = require('../models/products');
 
 // GET all products
 router.get('/', async (req, res) => {
-    console.log("REQUEST RECEIVED")
     try {
         const products = await Product.find();
-        console.log(products)
         res.json(products);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -15,14 +13,13 @@ router.get('/', async (req, res) => {
 });
 
 // GET one product
-router.get('/:id', getProduct, (req, res) => {
+router.get('/:_id', getProduct, (req, res) => {
     res.json(res.product);
 });
 
 // POST create a new product
 router.post('/', async (req, res) => {
     const product = new Product({
-        id: req.body.id,
         image: req.body.image,
         name: req.body.name,
         price: req.body.price,
@@ -38,10 +35,7 @@ router.post('/', async (req, res) => {
 });
 
 // PUT update a product
-router.put('/:id', getProduct, async (req, res) => {
-    if (req.body.id != null) {
-        res.product.id = req.body.id;
-    }
+router.put('/:_id', getProduct, async (req, res) => {
     if (req.body.image != null) {
         res.product.image = req.body.image;
     }
@@ -63,7 +57,7 @@ router.put('/:id', getProduct, async (req, res) => {
 });
 
 // DELETE a product
-router.delete('/:id', getProduct, async (req, res) => {
+router.delete('/:_id', getProduct, async (req, res) => {
     try {
         await res.product.remove();
         res.json({ message: 'Product deleted' });
@@ -75,14 +69,14 @@ router.delete('/:id', getProduct, async (req, res) => {
 async function getProduct(req, res, next) {
     let product;
     try {
-        product = await Product.findOne({ id: req.params.id });
+        product = await Product.findById(req.params._id);
+        console.log(product)
         if (product == null) {
             return res.status(404).json({ message: 'Product not found' });
         }
     } catch (err) {
         return res.status(500).json({ message: err.message });
     }
-
     res.product = product;
     next();
 }

@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 // create schema
 const productSchema = new mongoose.Schema({
-    id: Number,
     image: String,
     name: String,
     price: Number,
