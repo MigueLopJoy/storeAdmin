@@ -53,13 +53,35 @@ export class ProductsComponent {
   }
 
   editProduct(product: Product) {
-    console.log(this.selectedProduct._id)
     this.productsService
       .editProduct(`http://localhost:3000/products/${this.selectedProduct._id}`, product)
       .subscribe(
         {
           next: (editedProduct: Product) => {
-            this.products[this.products.indexOf(product)] = editedProduct            
+            const previousProduct: Product | undefined = this.products.find(product => product._id === editedProduct._id)
+            if (previousProduct) {
+              const previousProductIndex = this.products.indexOf(previousProduct)
+              this.products[previousProductIndex] = editedProduct    
+            }
+          },
+          error: (error: Error) => {
+            console.log(error);
+          },
+        }
+      )
+  }
+
+  deleteProduct(product: Product) {
+    this.productsService
+      .deleteProduct(`http://localhost:3000/products/${product._id}`)
+      .subscribe(
+        {
+          next: (deletedProduct: Product) => {
+            const previousProduct: Product | undefined = this.products.find(product => product._id === deletedProduct._id)
+            if (previousProduct) {
+              const previousProductIndex = this.products.indexOf(previousProduct)
+              this.products.splice(previousProductIndex, 1)
+            }
           },
           error: (error: Error) => {
             console.log(error);

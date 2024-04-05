@@ -15,8 +15,16 @@
 
     <div class="action-btns-wrapper d-flex justify-end gap-05 p-1">
         <p-button label="Edit" (click)="displayEditPopup()"></p-button>
-
-        <p-button label="Delete" severity="danger"></p-button>
+        <button
+            type="button"
+            pButton
+            icon="pi pi-trash"
+            (click)="confirmDelete()"
+            label="Delete"
+            class="p-button-danger"
+            #deleteButton
+      ></button>
     </div>
 
+    <p-confirmPopup></p-confirmPopup>
 </div>

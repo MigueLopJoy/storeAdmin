@@ -19,7 +19,10 @@ export class ApiService {
   }
 
   put<T>(url: string, body: Product): Observable<T> {
-    console.log("SEGUIMOS")
     return this.httpClient.put<T>(url, body);
+  }
+
+  delete<T>(url: string): Observable<T> {
+    return this.httpClient.delete<T>(url);
   }
 }

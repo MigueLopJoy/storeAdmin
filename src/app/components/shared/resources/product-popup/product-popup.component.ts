@@ -51,6 +51,8 @@ export class ProductPopupComponent {
       image: image || '',
       rating: rating || 0
     });
+    this.productForm.reset()
+    this.closeDialog()
   }
 
   onCancel() {
@@ -60,4 +62,5 @@ export class ProductPopupComponent {
   onDisplayChange() {
     this.displayChange.emit(this.display);
   }
+
 }

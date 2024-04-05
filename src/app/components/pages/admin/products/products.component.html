@@ -1,7 +1,11 @@
 <div class="products-wrapper p-1">
     <div class="products-cards-wrapper d-flex flex-wrap justify-center">
         @for(product of products; track product._id) {
-        <app-product [product]="product" (displayEditDialogChange)="displayEditDialog($event)"></app-product>
+            <app-product 
+                [product]="product" 
+                (edit)="displayEditDialog($event)"
+                (delete)="deleteProduct($event)"
+            ></app-product>
         }
     </div>
 
@@ -10,10 +14,10 @@
     </div>
 
     <div class="dialogs-wrapper">
-        <app-product-popup header="Add Product" [(display)]="displayAddPopup"
+        <app-product-popup [header]="dialogHeader" [(display)]="displayAddPopup"
             (confirm)="onConfirmAdd($event)"></app-product-popup>
 
-        <app-product-popup header="Edit Product" [selectedProduct]="selectedProduct" [(display)]="displayEditPopup"
+        <app-product-popup [header]="dialogHeader" [selectedProduct]="selectedProduct" [(display)]="displayEditPopup"
             (confirm)="onConfirmEdit($event)"></app-product-popup>
     </div>
 

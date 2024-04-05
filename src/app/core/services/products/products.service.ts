@@ -19,7 +19,10 @@ export class ProductsService {
   }
 
   editProduct(url: string, body: Product): Observable<Product>  {
-    console.log("ESTAMOS")
     return this.apiService.put(url, body);
+  }
+  
+  deleteProduct(url: string): Observable<Product>  {
+    return this.apiService.delete(url);
   }
 }
