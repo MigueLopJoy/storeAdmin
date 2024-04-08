@@ -4,11 +4,13 @@ import { Product } from '../../../../core/models/product';
 import { ProductComponent } from './product/product.component';
 import { ButtonModule } from 'primeng/button';
 import { ProductPopupComponent } from '../../../shared/resources/product-popup/product-popup.component';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductComponent, ButtonModule, ProductPopupComponent],
+  imports: [ProductComponent, ButtonModule, ProductPopupComponent, PaginatorModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -17,10 +19,13 @@ export class ProductsComponent {
   constructor(private productsService: ProductsService) {}
 
   products: Product[] = [];
+  productsToDisplay: Product[] = [];
   displayAddPopup: boolean = false;
   displayEditPopup: boolean = false;
   dialogHeader!: string;
   selectedProduct!: Product;
+  page: number = 0;
+  perPage: number = 4;
 
   fetchProducts() {
     this.productsService
@@ -29,6 +34,7 @@ export class ProductsComponent {
         {
           next: (products: Product[]) => {
             this.products = products;
+            this.modifyDisplayProductsArray();
           },
           error: (error: Error) => {
             console.log(error)
@@ -44,6 +50,7 @@ export class ProductsComponent {
         {
           next: (addedProduct: Product) => {
             this.products.push(addedProduct)
+            this.modifyDisplayProductsArray()
           },
           error: (error: Error) => {
             console.log(error);
@@ -62,6 +69,7 @@ export class ProductsComponent {
             if (previousProduct) {
               const previousProductIndex = this.products.indexOf(previousProduct)
               this.products[previousProductIndex] = editedProduct    
+              this.modifyDisplayProductsArray()
             }
           },
           error: (error: Error) => {
@@ -81,6 +89,7 @@ export class ProductsComponent {
             if (previousProduct) {
               const previousProductIndex = this.products.indexOf(previousProduct)
               this.products.splice(previousProductIndex, 1)
+              this.modifyDisplayProductsArray()
             }
           },
           error: (error: Error) => {
@@ -111,5 +120,24 @@ export class ProductsComponent {
 
   onConfirmEdit(product: Product) {
     this.editProduct(product);
+  }
+
+  onPageChange(ps: any | undefined) {
+    console.log(ps)
+    if (ps) {
+      this.page = ps.page
+      this.perPage = ps.rows
+      this.productsToDisplay = this.products.slice((ps.first), (ps.first + ps.rows)) 
+    } else {
+      let firstElement = ((this.page) * this.perPage)
+      console.log(firstElement)
+      console.log((firstElement + this.perPage))
+      this.productsToDisplay = this.products.slice(firstElement, (firstElement + this.perPage))
+    }
+  }
+
+  modifyDisplayProductsArray(){
+    this.productsToDisplay = this.products
+    this.onPageChange(undefined)
   }
 }

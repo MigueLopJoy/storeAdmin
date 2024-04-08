@@ -5,7 +5,14 @@ const Product = require('../models/products');
 // GET all products
 router.get('/', async (req, res) => {
     try {
-        const products = await Product.find();
+        const page = req.query.page,
+            perPage = req.query.perPage,
+            skip = perPage * (page - 1),
+            products = await Product.find(),
+            res = {
+                pageProducts: products.skip(skip).limit(perPage),
+                total: products.length
+            }
         res.json(products);
     } catch (err) {
         res.status(500).json({ message: err.message });

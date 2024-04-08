@@ -1,11 +1,8 @@
 <div class="products-wrapper p-1">
-    <div class="products-cards-wrapper d-flex flex-wrap justify-center">
-        @for(product of products; track product._id) {
-            <app-product 
-                [product]="product" 
-                (edit)="displayEditDialog($event)"
-                (delete)="deleteProduct($event)"
-            ></app-product>
+    <div class="products-cards-wrapper d-flex flex-wrap">
+        @for(product of productsToDisplay; track product._id) {
+        <app-product [product]="product" (edit)="displayEditDialog($event)"
+            (delete)="deleteProduct($event)"></app-product>
         }
     </div>
 
@@ -20,5 +17,8 @@
         <app-product-popup [header]="dialogHeader" [selectedProduct]="selectedProduct" [(display)]="displayEditPopup"
             (confirm)="onConfirmEdit($event)"></app-product-popup>
     </div>
+
+    <p-paginator (onPageChange)="onPageChange($event)" [rows]="perPage" [totalRecords]="products.length"
+        [rowsPerPageOptions]="[4, 8, 12]"></p-paginator>
 
 </div>

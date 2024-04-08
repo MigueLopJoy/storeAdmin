@@ -7,7 +7,8 @@
         </p-inputGroup>
 
         <p-inputGroup class="mb-1">
-            <p-inputNumber inputId="minmaxfraction" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="5" placeholder="Price" formControlName="price" />
+            <p-inputNumber inputId="minmaxfraction" mode="currency" inputId="currency-germany" currency="EUR"
+                locale="es-ES" placeholder="Price" formControlName="price" />
         </p-inputGroup>
 
         <p-inputGroup class="mb-1">
