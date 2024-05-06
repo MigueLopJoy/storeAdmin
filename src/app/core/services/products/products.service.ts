@@ -12,7 +12,7 @@ export class ProductsService {
 
   constructor(private apiService: ApiService) { }
 
-  getProducts(url: string): Observable<Product[]> {
+  getProducts(url: string): Observable<{pageProducts: Product[], total: number}> {
     return this.apiService.get(url);
   }
 

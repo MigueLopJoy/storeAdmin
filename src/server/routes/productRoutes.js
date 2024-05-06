@@ -8,12 +8,10 @@ router.get('/', async (req, res) => {
         const page = req.query.page,
             perPage = req.query.perPage,
             skip = perPage * (page - 1),
-            products = await Product.find(),
-            res = {
-                pageProducts: products.skip(skip).limit(perPage),
-                total: products.length
-            }
-        res.json(products);
+            products = await Product.find().skip(skip).limit(perPage),
+            total = await Product.countDocuments()
+        res.json({ pageProducts: products, total });
+
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

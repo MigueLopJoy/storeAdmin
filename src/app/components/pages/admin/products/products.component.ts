@@ -32,8 +32,8 @@ export class ProductsComponent {
       .getProducts('http://localhost:3000/products')
       .subscribe(
         {
-          next: (products: Product[]) => {
-            this.products = products;
+          next: (res: {pageProducts: Product[], total: number}) => {
+            this.products = res.pageProducts;
             this.modifyDisplayProductsArray();
           },
           error: (error: Error) => {
@@ -123,21 +123,24 @@ export class ProductsComponent {
   }
 
   onPageChange(ps: any | undefined) {
-    console.log(ps)
     if (ps) {
       this.page = ps.page
       this.perPage = ps.rows
       this.productsToDisplay = this.products.slice((ps.first), (ps.first + ps.rows)) 
     } else {
       let firstElement = ((this.page) * this.perPage)
-      console.log(firstElement)
-      console.log((firstElement + this.perPage))
+      console.log(this.productsToDisplay)
+      console.log(firstElement, (firstElement + this.perPage))
+      console.log(this.products.slice(firstElement, (firstElement + this.perPage)))      
+      console.log(this.products.slice(firstElement, (firstElement + this.perPage)))
       this.productsToDisplay = this.products.slice(firstElement, (firstElement + this.perPage))
     }
   }
 
   modifyDisplayProductsArray(){
+    console.log(this.products)
     this.productsToDisplay = this.products
     this.onPageChange(undefined)
+    console.log(this.productsToDisplay)
   }
 }

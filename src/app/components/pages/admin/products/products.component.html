@@ -1,5 +1,5 @@
 <div class="products-wrapper p-1">
-    <div class="products-cards-wrapper d-flex flex-wrap">
+    <div class="products-cards-wrapper d-flex flex-wrap justify-center">
         @for(product of productsToDisplay; track product._id) {
         <app-product [product]="product" (edit)="displayEditDialog($event)"
             (delete)="deleteProduct($event)"></app-product>
